@@ -58,6 +58,9 @@ document.getElementById("dialogue-form").addEventListener("submit", e => {
   document.getElementById("speaker-input").value = "";
   document.getElementById("message-input").value = "";
   renderDialogues();
+  // 커서를 발화자 입력란으로 이동
+  document.getElementById("speaker-input").focus();
+
 });
 
 // ----------------------

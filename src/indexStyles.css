@@ -145,3 +145,13 @@ input[type="text"]:focus {
   font-weight: normal;
   font-style: normal;
 }
+
+/* 홀짝 줄 교차 배경 (고정/유저 대화 모두에 적용) */
+#fixed-dialogues .dialogue-item:nth-child(odd),
+#user-dialogues .dialogue-item:nth-child(odd) {
+  background: #232c39;
+}
+#fixed-dialogues .dialogue-item:nth-child(even),
+#user-dialogues .dialogue-item:nth-child(even) {
+  background: #464e71;
+}
