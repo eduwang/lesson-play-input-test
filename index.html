@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>도트 RPG 대화문 에디터</title>
+  <link rel="stylesheet" href="/src/indexStyles.css" />
+  <script type="module" src="/src/indexMain.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🟩 대화문 에디터 🟩</h1>
+    <div class="dialogue-box">
+      <div id="fixed-dialogues-title">[문제 상황 (수정불가)]</div>
+      <ul id="fixed-dialogues"></ul>
+    </div>
+
+    <div class="dialogue-box">
+      <!-- <div id="user-dialogues-title">[내 대화문]</div> -->
+      <ul id="user-dialogues"></ul>
+    </div>
+
+    <form id="dialogue-form" autocomplete="off">
+      <div class="input-row">
+        <input id="speaker-input" type="text" placeholder="발화자 (예: 교사)" maxlength="12" required/>
+        <input id="message-input" type="text" placeholder="대화문 입력" maxlength="40" required/>
+        <button type="submit" id="add-btn">추가</button>
+      </div>
+    </form>
+    <p class="hint">💬 대화문을 추가/삭제/순서 변경해보세요!</p>
+  </div>
+</body>
+</html>

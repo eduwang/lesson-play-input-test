@@ -1,0 +1,147 @@
+body {
+  background: #191d2b;
+  font-family: 'Press Start 2P', 'DungGeunMo', monospace, 'Malgun Gothic';
+  color: #e4e4e4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 420px;
+  margin: 40px auto;
+  background: #22243a;
+  border: 4px solid #85f293;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px #101010a0;
+  padding: 32px 18px 24px 18px;
+}
+
+h1 {
+  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
+  font-size: 1.1rem;
+  color: #85f293;
+  text-shadow: 1px 1px 0 #3d674c, 2px 2px 0 #0f1d15;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.dialogue-box {
+  background: #171a26;
+  border: 2px dashed #64c8a7;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  padding: 8px 8px 4px 8px;
+}
+
+#fixed-dialogues-title,
+#user-dialogues-title {
+  color: #ffdd57;
+  font-size: 0.7rem;
+  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.dialogue-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.82rem;
+  background: #22243a;
+  border: 1.5px solid #464874;
+  border-radius: 5px;
+  margin-bottom: 7px;
+  padding: 3px 8px;
+  min-height: 30px;
+  letter-spacing: 0.1em;
+}
+
+.dialogue-item .speaker {
+  color: #8aedc3;
+  margin-right: 7px;
+  font-weight: bold;
+  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
+}
+
+.dialogue-item .message {
+  flex: 1;
+  color: #e9f5c2;
+  word-break: break-all;
+}
+
+.dialogue-item .action-btn {
+  background: #171a26;
+  color: #fd9b88;
+  border: 1.5px solid #ff7d7d;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  cursor: pointer;
+  margin-left: 3px;
+  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
+  transition: background 0.15s;
+}
+.dialogue-item .action-btn:active {
+  background: #fd9b88;
+  color: #22243a;
+}
+
+.input-row {
+  display: flex;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+input[type="text"] {
+  background: #161926;
+  border: 2px solid #59ad8a;
+  color: #ebffe7;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
+  padding: 7px;
+  font-size: 0.92rem;
+  width: 38%;
+  outline: none;
+  letter-spacing: 1.2px;
+}
+input[type="text"]:focus {
+  border-color: #ffd46d;
+  background: #22243a;
+}
+
+#add-btn {
+  background: #4ae1b2;
+  color: #191d2b;
+  border: 2px solid #51ba8d;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 7px 18px;
+  cursor: pointer;
+  transition: background 0.14s;
+}
+#add-btn:active {
+  background: #22243a;
+  color: #80f2ae;
+}
+
+.hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #87f3e6;
+  margin-top: 7px;
+}
+
+/* 픽셀폰트 (Google Fonts CDN 또는 직접 다운로드) */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
