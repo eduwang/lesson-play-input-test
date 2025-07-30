@@ -1,5 +1,5 @@
-// === 고정(제공) 대화문 예시 ===
-const fixedDialogues = [
+// 왼쪽(A): 기존 방식
+const fixedDialoguesA = [
   { speaker: "교사", message: "120의 약수를 찾고 있구나. 그런데 아까 “이렇게 짝을 찾아봤더니 끝났다.” 그런 말이었지?" },
   { speaker: "학생", message: "아니요?" },
   { speaker: "교사", message: "(고개를 끄덕이며) 그래? 그럼 일단 네가 찾은 약수를 다 말해봐." },
@@ -9,18 +9,13 @@ const fixedDialogues = [
   { speaker: "교사", message: "좋아. 잘 찾았네. 그런데 그게 진짜 전부라는 걸 어떻게 알 수 있지?" },
   { speaker: "학생", message: "혹시 제가 잘못한 건가요?" }
 ];
+let userDialoguesA = [];
 
-// === 유저 입력 대화 ===
-let userDialogues = [];
-
-// ----------------------
-// UI 렌더링
-// ----------------------
-function renderDialogues() {
+function renderDialoguesA() {
   // 고정 대화
-  const fixedList = document.getElementById("fixed-dialogues");
+  const fixedList = document.getElementById("fixed-dialogues-a");
   fixedList.innerHTML = "";
-  fixedDialogues.forEach(d => {
+  fixedDialoguesA.forEach((d) => {
     fixedList.innerHTML += `
       <li class="dialogue-item">
         <span class="speaker">${d.speaker}</span>
@@ -28,102 +23,146 @@ function renderDialogues() {
       </li>
     `;
   });
-
   // 유저 대화
-  const userList = document.getElementById("user-dialogues");
+  const userList = document.getElementById("user-dialogues-a");
   userList.innerHTML = "";
-  userDialogues.forEach((d, i) => {
+  userDialoguesA.forEach((d, i) => {
     userList.innerHTML += `
       <li class="dialogue-item" draggable="true" data-idx="${i}">
         <span class="speaker">${d.speaker}</span>
         <span class="message">${d.message}</span>
         <button class="action-btn move-up" title="위로 이동" ${i === 0 ? "disabled" : ""}>▲</button>
-        <button class="action-btn move-down" title="아래로 이동" ${i === userDialogues.length-1 ? "disabled" : ""}>▼</button>
+        <button class="action-btn move-down" title="아래로 이동" ${i === userDialoguesA.length - 1 ? "disabled" : ""}>▼</button>
         <button class="action-btn delete" title="삭제">삭제</button>
       </li>
     `;
   });
 }
-renderDialogues();
+renderDialoguesA();
 
-// ----------------------
-// 대화 추가
-// ----------------------
-document.getElementById("dialogue-form").addEventListener("submit", e => {
+document.getElementById("dialogue-form-a").addEventListener("submit", e => {
   e.preventDefault();
-  const speaker = document.getElementById("speaker-input").value.trim();
-  const message = document.getElementById("message-input").value.trim();
+  const speaker = document.getElementById("speaker-input-a").value.trim();
+  const message = document.getElementById("message-input-a").value.trim();
   if (!speaker || !message) return;
-  userDialogues.push({ speaker, message });
-  document.getElementById("speaker-input").value = "";
-  document.getElementById("message-input").value = "";
-  renderDialogues();
-  // 커서를 발화자 입력란으로 이동
-  document.getElementById("speaker-input").focus();
-
+  userDialoguesA.push({ speaker, message });
+  document.getElementById("speaker-input-a").value = "";
+  document.getElementById("message-input-a").value = "";
+  renderDialoguesA();
+  document.getElementById("speaker-input-a").focus();
 });
 
-// ----------------------
-// 대화 삭제/이동 (버튼)
-// ----------------------
-document.getElementById("user-dialogues").addEventListener("click", function(e) {
+document.getElementById("user-dialogues-a").addEventListener("click", function(e) {
   const li = e.target.closest(".dialogue-item");
   if (!li) return;
   const idx = parseInt(li.dataset.idx);
 
   if (e.target.classList.contains("delete")) {
-    userDialogues.splice(idx, 1);
-    renderDialogues();
+    userDialoguesA.splice(idx, 1);
+    renderDialoguesA();
   }
   if (e.target.classList.contains("move-up") && idx > 0) {
-    [userDialogues[idx-1], userDialogues[idx]] = [userDialogues[idx], userDialogues[idx-1]];
-    renderDialogues();
+    [userDialoguesA[idx - 1], userDialoguesA[idx]] = [userDialoguesA[idx], userDialoguesA[idx - 1]];
+    renderDialoguesA();
   }
-  if (e.target.classList.contains("move-down") && idx < userDialogues.length-1) {
-    [userDialogues[idx], userDialogues[idx+1]] = [userDialogues[idx+1], userDialogues[idx]];
-    renderDialogues();
+  if (e.target.classList.contains("move-down") && idx < userDialoguesA.length - 1) {
+    [userDialoguesA[idx], userDialoguesA[idx + 1]] = [userDialoguesA[idx + 1], userDialoguesA[idx]];
+    renderDialoguesA();
   }
 });
 
-// ----------------------
-// 드래그 앤 드롭 정렬
-// ----------------------
-let dragSrcIdx = null;
-const userList = document.getElementById("user-dialogues");
-
-userList.addEventListener("dragstart", function(e) {
+let dragSrcIdxA = null;
+const userListA = document.getElementById("user-dialogues-a");
+userListA.addEventListener("dragstart", function(e) {
   if (!e.target.classList.contains("dialogue-item")) return;
-  dragSrcIdx = Number(e.target.dataset.idx);
+  dragSrcIdxA = Number(e.target.dataset.idx);
   e.target.style.opacity = "0.4";
 });
-
-userList.addEventListener("dragend", function(e) {
-  if (e.target.classList.contains("dialogue-item")) {
-    e.target.style.opacity = "";
-  }
-  dragSrcIdx = null;
+userListA.addEventListener("dragend", function(e) {
+  if (e.target.classList.contains("dialogue-item")) e.target.style.opacity = "";
+  dragSrcIdxA = null;
 });
-
-userList.addEventListener("dragover", function(e) {
+userListA.addEventListener("dragover", function(e) {
   e.preventDefault();
   const li = e.target.closest(".dialogue-item");
   if (li) li.classList.add("drag-over");
 });
-userList.addEventListener("dragleave", function(e) {
+userListA.addEventListener("dragleave", function(e) {
   const li = e.target.closest(".dialogue-item");
   if (li) li.classList.remove("drag-over");
 });
-
-userList.addEventListener("drop", function(e) {
+userListA.addEventListener("drop", function(e) {
   e.preventDefault();
   const li = e.target.closest(".dialogue-item");
   if (!li) return;
   li.classList.remove("drag-over");
   const destIdx = Number(li.dataset.idx);
-  if (dragSrcIdx !== null && dragSrcIdx !== destIdx) {
-    const moved = userDialogues.splice(dragSrcIdx, 1)[0];
-    userDialogues.splice(destIdx, 0, moved);
-    renderDialogues();
+  if (dragSrcIdxA !== null && dragSrcIdxA !== destIdx) {
+    const moved = userDialoguesA.splice(dragSrcIdxA, 1)[0];
+    userDialoguesA.splice(destIdx, 0, moved);
+    renderDialoguesA();
   }
-  dragSrcIdx = null;
+  dragSrcIdxA = null;
+});
+
+// ========== B 방식: Handsontable (엑셀형) ==========
+import Handsontable from 'handsontable';
+import 'handsontable/dist/handsontable.full.min.css';
+
+// 초기 데이터 (두 줄)
+const excelData = [
+  ['교사', '120의 약수를 찾고 있구나. 그런데 아까 “이렇게 짝을 찾아봤더니 끝났다.” 그런 말이었지?'],
+  ['학생', '아니요?']
+];
+
+let hotB; // handsontable 인스턴스
+
+function createExcelTableB() {
+  const container = document.getElementById('excel-table-b');
+  hotB = new Handsontable(container, {
+    data: excelData,
+    colHeaders: ['발화자', '대화'],
+    rowHeaders: true,
+    contextMenu: true,
+    colWidths: [90, 260], // 예시, 상황에 맞게 조절
+    minRows: 2,
+    minCols: 2,
+    licenseKey: 'non-commercial-and-evaluation',
+    width: '100%',
+    height: 'auto',
+    stretchH: 'all',
+    manualRowResize: true,
+    manualColumnResize: true,
+    autoWrapRow: true,
+    autoWrapCol: true,
+    autoRowSize: true,   // 이 옵션 추가!
+    outsideClickDeselects: false,
+  });
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  createExcelTableB();
+  document.getElementById('add-row-b').onclick = () => {
+    const sel = hotB.getSelected();
+    let insertAt = hotB.countRows();
+    if (sel && sel.length > 0) {
+      insertAt = sel[0][0] >= 0 ? sel[0][0] + 1 : hotB.countRows();
+    }
+    // 먼저 insert_row 시도
+    try {
+      hotB.alter('insert_row', insertAt, 1);
+    } catch (e) {
+      // 최신버전 호환용
+      try {
+        hotB.alter('insert_row_below', insertAt - 1, 1);
+      } catch (e2) {
+        alert("Handsontable 버전 호환 문제가 있습니다.");
+      }
+    }
+  };
+  document.getElementById('del-row-b').onclick = () => {
+    const sel = hotB.getSelected();
+    if (sel && sel[0][0] >= 0) hotB.alter('remove_row', sel[0][0]);
+  };
 });

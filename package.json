@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "vite": "^7.0.4"
+  },
+  "dependencies": {
+    "handsontable": "^16.0.1"
   }
 }

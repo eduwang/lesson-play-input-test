@@ -1,157 +1,200 @@
-body {
-  background: #191d2b;
-  font-family: 'Press Start 2P', 'DungGeunMo', monospace, 'Malgun Gothic';
-  color: #e4e4e4;
-  margin: 0;
-  padding: 0;
+/* === 대화 에디터 전체 컨테이너 (split-container, editor-panel 등) === */
+.split-container {
+  display: flex;
+  gap: 30px;
+  max-width: 950px;
+  margin: 40px auto;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.container {
-  max-width: 420px;
-  margin: 40px auto;
-  background: #22243a;
-  border: 4px solid #85f293;
-  border-radius: 12px;
-  box-shadow: 0 4px 32px #101010a0;
-  padding: 32px 18px 24px 18px;
+.editor-panel {
+  flex: 1 1 0;
+  min-width: 340px;
+  background: #ffffffcc;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(33,150,243,0.07);
+  padding: 26px 18px 20px 18px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 헤더 컬러 구분 */
+.left-panel h1 {
+  color: #1976d2;
+}
+.right-panel h1 {
+  color: #388e3c;
 }
 
 h1 {
-  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
-  font-size: 1.1rem;
-  color: #85f293;
-  text-shadow: 1px 1px 0 #3d674c, 2px 2px 0 #0f1d15;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.08rem;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  letter-spacing: 1.5px;
 }
 
 .dialogue-box {
-  background: #171a26;
-  border: 2px dashed #64c8a7;
-  margin-bottom: 18px;
-  border-radius: 8px;
+  background: #e3f2fd;
+  border-radius: 9px;
   padding: 8px 8px 4px 8px;
+  margin-bottom: 16px;
+  border: 1.5px solid #b3e5fc;
 }
 
-#fixed-dialogues-title,
-#user-dialogues-title {
-  color: #ffdd57;
-  font-size: 0.7rem;
-  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
-  margin-bottom: 4px;
+.fixed-dialogues-title,
+.user-dialogues-title {
+  color: #1976d2;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 6px;
   letter-spacing: 0.5px;
+  padding-left: 2px;
 }
 
 ul {
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 
+/* === 대화 라인 홀짝 스타일 === */
 .dialogue-item {
   display: flex;
   align-items: center;
-  font-size: 0.82rem;
-  background: #22243a;
-  border: 1.5px solid #464874;
+  font-size: 1rem;
   border-radius: 5px;
-  margin-bottom: 7px;
-  padding: 3px 8px;
-  min-height: 30px;
-  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  min-height: 32px;
+  transition: background 0.15s;
+}
+
+#fixed-dialogues-a .dialogue-item:nth-child(odd),
+#user-dialogues-a .dialogue-item:nth-child(odd),
+#fixed-dialogues-b .dialogue-item:nth-child(odd),
+#user-dialogues-b .dialogue-item:nth-child(odd) {
+  background: #f1f8e9;  /* 연한 연두 */
+}
+
+#fixed-dialogues-a .dialogue-item:nth-child(even),
+#user-dialogues-a .dialogue-item:nth-child(even),
+#fixed-dialogues-b .dialogue-item:nth-child(even),
+#user-dialogues-b .dialogue-item:nth-child(even) {
+  background: #e3f2fd; /* 연한 하늘 */
 }
 
 .dialogue-item .speaker {
-  color: #8aedc3;
-  margin-right: 7px;
+  color: #1976d2;
+  margin-right: 8px;
   font-weight: bold;
-  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
+  min-width: 54px;
+  text-align: right;
 }
 
 .dialogue-item .message {
   flex: 1;
-  color: #e9f5c2;
+  color: #333;
   word-break: break-all;
 }
 
 .dialogue-item .action-btn {
-  background: #171a26;
-  color: #fd9b88;
-  border: 1.5px solid #ff7d7d;
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 1px solid #90caf9;
   border-radius: 3px;
-  font-size: 0.7rem;
-  padding: 2px 8px;
+  font-size: 0.8rem;
+  padding: 2px 9px;
   cursor: pointer;
-  margin-left: 3px;
-  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
-  transition: background 0.15s;
+  margin-left: 4px;
+  transition: background 0.12s;
 }
 .dialogue-item .action-btn:active {
-  background: #fd9b88;
-  color: #22243a;
+  background: #1976d2;
+  color: #fff;
 }
 
+/* drag-over 효과 */
+.dialogue-item.drag-over {
+  border: 2px dashed #1976d2;
+  background: #fffde7 !important;
+}
+
+/* 입력 row */
 .input-row {
   display: flex;
-  gap: 7px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 9px;
 }
 
 input[type="text"] {
-  background: #161926;
-  border: 2px solid #59ad8a;
-  color: #ebffe7;
-  border-radius: 4px;
-  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
-  padding: 7px;
-  font-size: 0.92rem;
+  background: #f9fbe7;
+  border: 1.5px solid #b3e5fc;
+  color: #1976d2;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 8px;
   width: 38%;
   outline: none;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
 }
 input[type="text"]:focus {
-  border-color: #ffd46d;
-  background: #22243a;
+  border-color: #1976d2;
+  background: #e3f2fd;
 }
 
-#add-btn {
-  background: #4ae1b2;
-  color: #191d2b;
-  border: 2px solid #51ba8d;
+/* 추가 버튼 스타일 */
+button[type="submit"], #add-btn-a, #add-btn-b {
+  background: #1976d2;
+  color: #fff;
+  border: none;
   border-radius: 4px;
-  font-family: 'Press Start 2P', 'DungGeunMo', monospace;
   font-size: 1rem;
   font-weight: bold;
-  padding: 7px 18px;
+  padding: 8px 20px;
   cursor: pointer;
-  transition: background 0.14s;
+  transition: background 0.13s;
 }
-#add-btn:active {
-  background: #22243a;
-  color: #80f2ae;
+button[type="submit"]:active,
+#add-btn-a:active, #add-btn-b:active {
+  background: #1565c0;
 }
 
+/* hint */
 .hint {
   text-align: center;
-  font-size: 0.8rem;
-  color: #87f3e6;
+  font-size: 0.9rem;
+  color: #388e3c;
   margin-top: 7px;
 }
 
-/* 픽셀폰트 (Google Fonts CDN 또는 직접 다운로드) */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@font-face {
-  font-family: 'DungGeunMo';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.0/DungGeunMo.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+/* Handsontable 표도 대화 스타일에 맞게 홀짝 적용 */
+.handsontable .htCore tbody tr:nth-child(odd) td {
+  background: #f1f8e9 !important;
+}
+.handsontable .htCore tbody tr:nth-child(even) td {
+  background: #e3f2fd !important;
+}
+.handsontable .htCore td {
+  color: #1976d2;
+  font-size: 1rem;
+  white-space: pre-line !important;
+  word-break: break-all;
+  border: 1px solid #b3e5fc;
 }
 
-/* 홀짝 줄 교차 배경 (고정/유저 대화 모두에 적용) */
-#fixed-dialogues .dialogue-item:nth-child(odd),
-#user-dialogues .dialogue-item:nth-child(odd) {
-  background: #232c39;
-}
-#fixed-dialogues .dialogue-item:nth-child(even),
-#user-dialogues .dialogue-item:nth-child(even) {
-  background: #464e71;
+/* 반응형 */
+@media (max-width: 900px) {
+  .split-container {
+    flex-direction: column;
+    gap: 16px;
+    max-width: 99vw;
+  }
+  .editor-panel {
+    min-width: 0;
+    width: 98vw;
+    margin: 0 auto 24px auto;
+  }
 }
